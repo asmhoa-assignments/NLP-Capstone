@@ -16,8 +16,8 @@
 title: CSE 481 Low Resource Dialects
 email: amols2@uw.edu
 description: >- # this means to ignore newlines until "baseurl:"
-Blog for a project involving low resource dialects of high resource languages as
-part of the Natural Language Processing Capstone at the University of Washington.
+  Blog for a project involving low resource dialects of high resource languages as
+  part of the Natural Language Processing Capstone at the University of Washington.
 baseurl: "/481-dialects" # the subpath of your site, e.g. /blog
 url: "www.asmhoa.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
