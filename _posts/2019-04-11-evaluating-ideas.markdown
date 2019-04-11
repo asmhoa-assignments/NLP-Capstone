@@ -4,8 +4,18 @@ title:  "Evaluating Ideas"
 categories: team
 ---
 
+We've spent the past couple days looking at the feasibility of each of the three
+ideas in our previous post.  There are still many open questions, but we're
+getting closer to a final project proposal.
+
 ## Pros and Cons
 1. **Idea 1 (Dialect Dataset)**
+    - Premise: We would create an annotated dataset of tweets and sentences from
+      various dialects of English.  The immediate target is distinguishing
+      between "standard" {American, British, Australian, New Zealand, etc.}
+      Englishes, with a goal of also obtaining more fine-grained data about the
+      vernacular(s) in each area.  To the best of our ability, we would collect
+      data in a way that eliminates conflating factors, such as topic.
     - Pros
         - Prior work on constructing datasets from Twitter and about dialects
           exists (Blodgett et al. 2018 is a major example).
@@ -25,12 +35,16 @@ categories: team
 3. **Idea 3 (Translation)**
 
 ## Codebases
+We likely won't train any models until our dataset is collected, so most of the
+software we'd need to use involves methods for collecting data.  Here's what we
+have so far:
 - [tweepy](https://tweepy.org) is a Python package for obtaining tweets
 - [Amazon Mechanical Turk](https://mturk.com) is a crowdsourcing platform that
   we could use for annotations
 
 
 ## Lecture Topics
-- Data Mining/Collection, especially methods for eliminating artifacts and
-  ensuring robustness in annotations
+It could be helpful to have a lecture or discussion on data mining/collection, 
+especially methods for eliminating artifacts and ensuring robustness in 
+annotations.
 
