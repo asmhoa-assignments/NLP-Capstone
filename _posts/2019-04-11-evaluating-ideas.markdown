@@ -5,7 +5,7 @@ categories: team
 ---
 
 We've spent the past couple days looking at the feasibility of each of the three
-ideas in our previous post.  There are still many open questions, but we're
+ideas in our previous post. There are still many open questions, but we're
 getting closer to a final project proposal.
 
 ## Pros and Cons
@@ -32,6 +32,12 @@ getting closer to a final project proposal.
         - We would have to make several assumptions about what features define a
           dialect, and annotating for them will be time-consuming and difficult.
 2. **Idea 2 (Supervised Classifier)**
+    - Premise: n-gram models still outperform neural methods when it comes to differentiating language that is very similar. Word embeddings alone cannot help us differentiate between small differences in dialects, especially without a parallel corpus. This project should improve on the n-gram method in terms of accuracy.
+    - Pros
+        - This work would be useful to the larger community, and the method could be extended to other tasks where we need to find similarities between texts
+        - Amol is excited about this one
+    - Cons
+        - We did not find a suitable corpus in our research so we may not be able to complete this task
 3. **Idea 3 (Translation)**
 
 ## Codebases
