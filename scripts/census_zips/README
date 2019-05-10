@@ -1,0 +1,43 @@
+
+
+Getting bounding boxes based on ACS survey data.
+
+data files:
+ACS_17_5YR_S0601_with_ann.csv -- ACS 2017 5-year summary data, table 601
+	available at: https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_S0601&prodType=table
+	if you want to get the zip code granularity rather than whole country you have to do that on the page (choose geography option 860); apparently it's not encoded in the link.
+	- also, the metadata file. this is useful for identifying columns: find the line you want, then subtract one to get census_boxer.py's --feature or extract.py's colNum
+zip_codes.csv -- a database of location information for zip codes
+	available at: https://fusiontables.google.com/DataSource?docid=1Lae-86jeUDLmA6-8APDDqazlTOy1GsTXh28DAkw#rows:id=1
+	(however fusion tables are apparently going to stop existing soon, so it's a good thing we also have the table here)
+
+zip_res.tsv -- the latitude, longitude, and state information of the zip code data
+	(was extracted using zip_loc_extract.py)
+
+how to get boxes:
+- run census_boxer.py
+	example:
+		python census_boxer.py --feature 115 --box_cutoff 10 --min_percent 60 --boxes result
+		--> gets the boxes we used for collecting possibly-AAVE tweets
+	arguments:
+	- feature (required): integer indicating which column of the ACS table you want
+	- dump_zips (optional): filename to write extracted ACS data
+	- min_percent (optional, defaults to 0): integer. filter out zips whose feature is less than this number
+	- max_dist (optional, defaults to 0.1): float. zips closer than this will be grouped together. basically a hyperparameter
+	- dump_groups (optional): filename to write zip groups in as json.
+		- to get a list of ZipGroups back from it, send open file to group_boxes.load_groups
+	- box_cutoff (optional, defaults to 0): don't output the boxes with less than this many zips
+	- boxes (required): name of file to write boxes to
+		- header at top. format: tab-separated minLong,minLat,maxLat,maxLong,numZips
+
+- alternatively, use all the scripts, which write to files each time.
+	- extract.py <ACS file> <outfile> <colNum> : writes tab-separated zip,value-of-colNum-inACS to outfile
+		- we used column 115 (total estimated percent African American) and column 163 (total estimated percent Hispanic/Latino)
+	- filterer.py <infile> <outfile> <percent> : reads input from extract.py-styled files and writes back the zips whose second column is larger than <percent>; writes them one per line to <oufile>
+	- zip_info_matcher.py zip_res.tsv <infile> <outfile> :
+		- reads zips one per line from <infile> and gets their latitude and longitude from zip_res.tsv
+		- writes results to <outfile> in tab-separated zip,lat,long,state
+		- prints zips it could not find lat/long information for
+		- Contains ZipGroup objects, which can be converted to json.
+	- group_boxes.py <infile> <outfile> : reads json-ZipGroup objects from <infile> and writes bounding boxes to <outfile>, sorted by number of zips in group (most last).
+
