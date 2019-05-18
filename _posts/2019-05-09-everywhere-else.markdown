@@ -1,3 +1,9 @@
+---
+layout: post
+title:  "Everywhere Else"
+categories: team
+---
+
 # Everywhere Else
 
 This week, we finalize our Tweet-cleaning mechanism and compile the first version of our dataset for non-US dialects.  Here's where we are in our roadmap:
